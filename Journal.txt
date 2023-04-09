@@ -1,0 +1,31 @@
+day 1+2
+Download the images from the aws bucket
+
+day 2
+the images are huge, first attempt to downscale them to full hd resolutionwhile keeping the aspect ratio.
+I used imagemagick on linux
+sudo apt-get install imagemagick
+the images are too large so I went to /etc/ImageMagick-6 directory to change the policy.xml file for it to accept big images.
+failed
+checked if the images that are downloaded are correct with checksum, in the terminal "cksum 0a8f2tx6.tif" and compare the number with the one in train_metadata.
+
+explanation about tag while reading
+https://www.loc.gov/preservation/digital/formats/content/tiff_tags.shtml
+
+
+turns out after running identify 0a8f2tx6.tif that the tif file is a pyramid conraining multiple pages with different resolutions
+0a8f2tx6.tif[0] TIFF 94208x103424 94208x103424+0+0 8-bit sRGB 896.721MiB 0.000u 0:00.003
+0a8f2tx6.tif[1] TIFF 47104x51712 47104x51712+0+0 8-bit sRGB 0.000u 0:00.001
+0a8f2tx6.tif[2] TIFF 23552x25856 23552x25856+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[3] TIFF 11776x12928 11776x12928+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[4] TIFF 5888x6464 5888x6464+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[5] TIFF 2944x3232 2944x3232+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[6] TIFF 1472x1616 1472x1616+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[7] TIFF 736x808 736x808+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[8] TIFF 368x404 368x404+0+0 8-bit sRGB 0.000u 0:00.000
+0a8f2tx6.tif[9] TIFF 184x202 184x202+0+0 8-bit sRGB 0.000u 0:00.000
+
+used the tifffile library to pick the resolution I would like to work with and matplotlib to display it.
+
+day 3
+
